@@ -1,0 +1,10 @@
+---
+title: "Data Vizualization"
+output: github_document
+---
+
+```{r setup}
+library(tidyverse)
+```
+
+
