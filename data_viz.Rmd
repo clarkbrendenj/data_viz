@@ -128,5 +128,52 @@ weather_df %>%
   geom_histogram()
 ```
 
+can we add color
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_histogram() +
+  facet_grid(. ~ name)
+```
+
+Lets try a new geometry
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_density(alpha = .4)
+```
+
+
+What about box plots?
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = name, y = tmin)) +
+  geom_boxplot()
+```
+
+Trendy plots 
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = name, y = tmin, fill = name)) + 
+  geom_violin(alpha = .5) +
+  stat_summary()
+```
+
+
+Ridge Plots -- the most popular plot of 2017
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmin, y = name)) +
+  geom_density_ridges()
+```
+
+
+
+
 
 

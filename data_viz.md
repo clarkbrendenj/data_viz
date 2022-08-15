@@ -217,3 +217,73 @@ weather_df %>%
     ## Warning: Removed 15 rows containing non-finite values (stat_bin).
 
 ![](data_viz_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+can we add color
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_histogram() +
+  facet_grid(. ~ name)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_bin).
+
+![](data_viz_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+Lets try a new geometry
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_density(alpha = .4)
+```
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_density).
+
+![](data_viz_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+What about box plots?
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = name, y = tmin)) +
+  geom_boxplot()
+```
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_boxplot).
+
+![](data_viz_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+Trendy plots
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = name, y = tmin, fill = name)) + 
+  geom_violin(alpha = .5) +
+  stat_summary()
+```
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_ydensity).
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_summary).
+
+    ## No summary function supplied, defaulting to `mean_se()`
+
+![](data_viz_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+Ridge Plots – the most popular plot of 2017
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = name)) +
+  geom_density_ridges()
+```
+
+    ## Picking joint bandwidth of 1.67
+
+    ## Warning: Removed 15 rows containing non-finite values (stat_density_ridges).
+
+![](data_viz_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
