@@ -9,7 +9,7 @@ library(patchwork)
 ```
 
 
-## Load thw weather data
+## Load the weather data
 
 ```{r}
 weather_df = 
@@ -27,5 +27,26 @@ weather_df =
     tmin = tmin / 10,
     tmax = tmax / 10) %>%
   select(name, id, everything())
+```
+
+# remember this plot
+
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .5)
+```
+
+# Labels
+```{r}
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily Temperature (C)",
+    caption = "Data from rnoaa package; temperature in 2017."
+  )
 ```
 

@@ -18,7 +18,7 @@ library(tidyverse)
 library(patchwork)
 ```
 
-## Load thw weather data
+## Load the weather data
 
 ``` r
 weather_df = 
@@ -59,3 +59,33 @@ weather_df =
     ## date created (size, mb): 2022-08-14 19:27:33 (0.95)
 
     ## file min/max dates: 1999-09-01 / 2022-08-31
+
+# remember this plot
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .5)
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data_viz._ii_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+# Labels
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maximum daily Temperature (C)",
+    caption = "Data from rnoaa package; temperature in 2017."
+  )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data_viz._ii_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
