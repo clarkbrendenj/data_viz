@@ -175,7 +175,8 @@ weather_df %>%
   viridis::scale_color_viridis(
     name = "Location",
     discrete = TRUE) +
-  theme_minimal()
+  theme_bw() +
+  theme(legend.position = "bottom")
 ```
 
     ## Warning: Removed 15 rows containing missing values (geom_point).
