@@ -25,7 +25,8 @@ weather_df =
       USC00519397 = "Waikiki_HA",
       USS0023B17S = "Waterhole_WA"),
     tmin = tmin / 10,
-    tmax = tmax / 10) %>%
+    tmax = tmax / 10,
+    month = lubridate::floor_date(date, unit = "month")) %>% 
   select(name, id, everything())
 ```
 
@@ -50,5 +51,57 @@ options(
 
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
+```
+
+## 'group_by'
+
+```{r}
+weather_df %>% 
+  group_by(name, month) %>% 
+  ungroup(month)
+```
+
+## counting things
+
+count month observations
+
+```{r}
+weather_df %>% 
+  group_by(month) %>% 
+  summarise(n_obs = n())
+
+weather_df %>% 
+  group_by(name) %>% 
+  summarise(n_obs = n())
+
+weather_df %>% 
+  group_by(name, month) %>% 
+  summarise(n_obs = n())
+```
+
+we can 'count'
+
+```{r}
+weather_df %>% 
+  count(name, month, name = "n_obs")
+```
+
+** NEVER use base R's 'table' 
+
+```{r}
+weather_df %>% 
+  pull(month) %>% 
+  table()
+```
+
+other helpful counters 
+
+```{r}
+weather_df %>% 
+  group_by(month) %>% 
+  summarise(
+    n_obs = n(),
+    n_days = n_distinct(date))
+
 ```
 
