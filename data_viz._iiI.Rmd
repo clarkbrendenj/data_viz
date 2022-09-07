@@ -3,9 +3,30 @@ title: "Data Vizualization III Exploratory Analysis"
 output: github_document
 ---
 
-```{r setup}
-library(tidyverse)
+# Setup
+
+```{r setuo}
 library(patchwork)
+library(janitor)
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+
+theme_set(theme_bw() +
+  theme(legend.position = "bottom"))
+
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
 ```
 
 
@@ -28,29 +49,6 @@ weather_df =
     tmax = tmax / 10,
     month = lubridate::floor_date(date, unit = "month")) %>% 
   select(name, id, everything())
-```
-
-
-```{r}
-library(tidyverse)
-
-knitr::opts_chunk$set(
-  fig.width = 6,
-  fig.asp = .6,
-  out.width = "90%"
-)
-
-theme_set(theme_bw() +
-  theme(legend.position = "bottom"))
-
-
-options(
-  ggplot2.continuous.colour = "viridis",
-  ggplot2.continuous.fill = "viridis"
-)
-
-scale_colour_discrete = scale_colour_viridis_d
-scale_fill_discrete = scale_fill_viridis_d
 ```
 
 ## 'group_by'
@@ -243,4 +241,21 @@ weather_df %>%
 
 summarize only gets you so far
 
+
+```{r}
+nyc_airbnb = read_csv("./data/nyc_airbnb.csv")
+
+nyc_airbnb = 
+  nyc_airbnb %>% 
+  mutate(stars = review_scores_location / 2) %>% 
+  rename(
+    borough = neighbourhood_group,
+    neighborhood = neighbourhood) %>% 
+  select(price, stars, borough, neighborhood, room_type)
+```
+
+```{r}
+nyc_airbnb %>% 
+  tabyl(borough, room_type)
+```
 
